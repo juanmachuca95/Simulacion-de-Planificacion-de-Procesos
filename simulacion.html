@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Simulaci&oacuten | Gr&aacutefica de Procesos</title>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+	<!--Bootstrap 4-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/3b9095d4bc.js" crossorigin="anonymous"></script>
+	
+</head>
+
+
+<body>
+	<div class="container py-4 px-0">
+		<div class="px-3">
+			<h4>Simulaci&oacuten Gr&aacutefica de Procesos <i class="fas fa-chart-bar text-warning"></i></h4>
+			<hr>
+		</div>
+		<div class="row m-0">
+			<div class="col-md-5">
+				<h6>
+					<a style="text-decoration: none; font-weight: lighter;" id="fila" href="#">Agrega fila- </a>
+					<a style="text-decoration: none; font-weight: lighter;" id="borrar" href=""> Reiniciar </a>
+				</h6>
+				<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">Tarea</th>
+				      <th scope="col">T.I.</th>
+				      <th scope="col">DUR.</th>
+				      <th scope="col">T.E.</th>
+				      <th scope="col">T.R.</th>
+				    </tr>
+				  </thead>
+				  <form id="form-datos">
+				  <tbody id="tablaDatos">
+				  	<tr>
+				  		<td>
+				  			<input class="form-control" type="text" id="nomProceso" value="A" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="1" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="5" required>
+				  		</td>
+				  		<td></td>
+				  		<td></td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+				  			<input class="form-control" type="text" id="nomProceso" value="B" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="2" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="3" required>
+				  		</td>
+				  		<td></td>
+				  		<td></td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+				  			<input class="form-control" type="text" id="nomProceso" value="C" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="4" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="11" required>
+				  		</td>
+				  		<td></td>
+				  		<td></td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+				  			<input class="form-control" type="text" id="nomProceso" value="D" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="5" required>
+				  		</td>
+				  		<td>
+				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="1" required>
+				  		</td>
+				  		<td></td>
+				  		<td></td>
+				  	</tr>
+				  </tbody>
+				</table>
+				<div class="text-danger" id="respuesta"></div>
+				<button class="btn btn-warning text-dark" type="submit" id="generar">Generar Gr&aacutefica</button>
+				</form>
+				</div>
+				
+			</div>
+			<div class="col-12 col-sm-12 col-md-7 col-lg-7 py-4">
+				<h6><b>Tarea</b> : Nombre del proceso | <b>T.I.</b> : Tiempo de irrupci&oacuten | <b>T.E.</b> : Tiempo de espera | <b>T.R.</b> : Tiempo de retorno.</h6>
+				<div class="Chart m-4" id="MyCanvas" style="position: relative;">
+					<canvas id="tMasCorto" style="min-height: 300px; max-height: 300px; max-width: 300;">
+					</canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="plugins/inputnumber/bootstrap-input-spinner.js"></script>
+</body>
+<footer class="bg-light">
+	<div class="container font-weight-light p-0">
+		<div class="p-5 font-weight-bold">
+			<p>Planificaci&oacuten del Procesador</p>
+			<p>Tecn&oacutelogias: <b class=" text-warning">Javascript</b></p>
+			<p>Programador: Machuca Juan Gabriel</p>
+		</div>
+		<p class="text-center m-0 p-0">Todos los derechos reservados &#xae;&#xfe0f;<b class="font-weight-bold">Abanderados 2020 </b></p>
+	</div>
+</footer>
+
+</html>
+
+<script type="text/javascript">
+
+
+	/*Eventos asignados*/
+	document.getElementById('fila').addEventListener('click',crearFila,false);
+	document.getElementById('generar').addEventListener('click',generar,false);
+	document.getElementById('borrar').addEventListener('click',borrar,false);
+
+	function crearFila(){
+		$('<tr>').append(
+			$('<td>').append(
+				$('<input>',{
+					'class' : 'form-control',
+					'id'	: 'nomProceso',
+					'placeholder' : '[A-Z]',
+					'required': true,
+				})
+			),
+			$('<td>').append(
+				$('<input>',{
+					'class' : 'form-control',
+					'id'	: 'irr',
+					'placeholder' : '-',
+					'type' : 'number',
+					'max' : 100,
+					'min': 0,
+					'required': true,
+				})
+			),
+			$('<td>').append(
+				$('<input>',{
+					'class' : 'form-control',
+					'id'	: 'dur',
+					'placeholder' : '-',
+					'max' : 99,
+					'min': 1,
+					'type' : 'number',
+					'required': true,
+				})
+			),
+			$('<td>'),
+			$('<td>'),
+		).appendTo('#tablaDatos');
+	}
+
+	function borrar(e){
+		e.preventDefault();
+		document.getElementById('tablaDatos').innerHTML = '';
+		crearFila();crearFila();crearFila();crearFila();
+		ctx = document.getElementById('tMasCorto');
+		ctx.remove();
+		newCanv = document.createElement('canvas');
+		newCanv.id = 'tMasCorto';
+		newCanv.style.minHeight = '300px';
+		newCanv.style.minWidth = '300px';
+		document.getElementById('MyCanvas').appendChild(newCanv);
+		document.getElementById('generar').style.display = 'block';
+
+	}
+
+
+	function generar(e){
+		e.preventDefault();
+		irrupciones = $('input#irr');
+		duraciones 	= $('input#dur');
+		tareas 		= $('input#nomProceso');
+		
+		if(irrupcionesNoVacias(irrupciones) && duracionesNoVacias(duraciones) && nombresTareasNoVacias(tareas)){
+			if(!falloUsuario()){
+				nombres = new Array(); datos = new Array();
+				procesos = irrupciones.length;
+				$('#respuesta').html('');
+				
+				for(j=0; j < irrupciones.length; j++){
+					datos[parseInt(irrupciones[j].value)] = parseInt(duraciones[j].value);
+					nombres.push(tareas[j].value);
+				}
+				for(var i=0; i < datos.length; i++){
+					if(datos[i] === undefined){
+						datos[i] = 0;
+					}
+				}
+				console.log('Los datos son '+datos+' cantidad: '+procesos+' nombres: '+nombres);
+				boton = document.getElementById('generar');
+				boton.style.display = "none";
+
+				graficar(datos, procesos, nombres);
+			}else{
+				$('#respuesta').html('<p>Las irrupciones no están ordenadas.</p>');
+			}
+		}else{
+			alert("Datos incompletos");
+		}
+	}
+
+
+	function graficar(datos, procesos, nombres){
+		irrup = datos;
+		console.log(irrup);
+		/*Por defecto la irrupcion sera el indice y la duracion el contenido de ese indice*/
+		fin = 0;
+		inicio = 0;
+		recta = 0;
+		i=0; 
+		ejecutar = procesos;
+		enEspera = new Array();
+		ejecutado = new Array();
+		grafica = new Array();
+		tEspera = new Array();
+
+		/*Desarrollos Juan Gabriel Machuca*/
+		while (ejecutar !== 0){
+			
+			dato = menorEnCola();
+			dat = (dato == undefined)? 100 : irrup[dato];
+			//i = (yaEjecutado(i))? i+1 : i;
+			while(yaEjecutado(i)){
+				i++;
+			}
+
+			if(irrup[i] < dat && irrup[i] !== 0){
+				
+				console.log('SE EJECUTO: '+i+' DURO: '+irrup[i]);
+
+				recta = (recta == 0)? i+irrup[i] : recta + irrup[i];
+				console.log('EL INTERVALO SERA : '+(recta-irrup[i])+' , '+recta);
+				grafica[i] = new Array(recta-irrup[i],recta);
+				console.log(grafica[i]);
+
+				//irrupcionesEnCola(i+1, i+irrup[i]);	
+				ejecutado.push(i);	
+				irrupcionesEntrantes(recta);
+				ejecutar--;
+				i++;
+
+			}else if(enEspera.length !== 0 && yaEjecutado(dato) == false){
+
+				console.log('SE EJECUTO: '+dato+' DURO: '+dat);
+
+
+				recta = (recta == 0)? dato+irrup[dato] : recta + irrup[dato];
+				console.log('EL INTERVALO SERA : '+(recta-irrup[dato])+' , '+recta);
+				grafica[dato] = new Array(recta-irrup[dato],recta);
+				console.log(grafica[dato]);
+
+				irrupcionesEntrantes(recta);
+				//irrupcionesEnCola(dato+1, dato+dat);
+				eliminarEnEspera(dato);
+				i++;
+				ejecutar--;
+
+			}else{
+				i++;	
+			}
+
+			console.log(grafica);
+
+			console.log('EN ESPERA: '+enEspera);
+		}
+
+
+		/*Preparamos el Array para el grafico*/
+		graf = new Array();
+		g=0;
+		for(i=0; i < grafica.length; i++){
+		    if(grafica[i] !== undefined){
+		    graf[g] = grafica[i];
+		        g++;
+		  }
+		}
+
+		nombres = nombres.reverse();
+		graf = graf.reverse();
+
+		function menorEnCola(){
+			menor = enEspera[0];
+			for (var i = 0; i < enEspera.length; i++) {
+				if(irrup[enEspera[i]] < irrup[menor]){
+					menor = enEspera[i];
+				}
+			}
+			return menor;
+		}
+
+
+		function eliminarEnEspera(j){
+			arr = new Array();
+			ejecutado.push(j);
+			for(l=0; l < enEspera.length; l++){
+				if(enEspera[l] !== j){
+					arr.push(enEspera[l]);
+				}
+			}
+			enEspera = arr;
+			return enEspera;
+		}
+
+
+		function yaEjecutado(k){
+			if(ejecutado.find(element=>element == k)){
+				return true;
+			}
+			return false;
+		}
+
+		function irrupcionesEntrantes(recta){
+			r=0;
+			esp = new Array();
+			while(r <= recta){
+				if(yaEjecutado(r) == false && irrup[r] !== 0 && irrup[r] !== undefined){
+					esp.push(r);
+				}
+				r++;
+			} 
+		 	enEspera = esp;
+		}
+
+
+		/*GRAFICO CHARTJS*/
+		var ctx = document.getElementById('tMasCorto').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'horizontalBar',
+			data: {
+				labels: nombres,
+				datasets: [{
+					label: 'Trabajo mas Corto',
+					data: graf, 
+					backgroundColor: [
+		                'rgb(255, 191, 0)',
+		                'rgb(153, 230, 230)',
+		                'rgb(196, 77, 255)',
+		                'rgb(153, 255, 204)',
+		                'rgb(0, 153, 204)',
+		                'rgba(153, 102, 255)',
+		                'rgba(255, 159, 64)'
+		            ],
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				aspectRatio: 2,
+				responsiveAnimationDuration: 2,
+			}
+		})
+	}
+
+
+	/*Validando IRRUPCIONES*/
+	function falloUsuario(){
+		detectError = false;
+		irrupciones = $('input#irr');
+		ultimaIrrup = irrupciones[irrupciones.length-1].value;
+		for (var i = 0; i < irrupciones.length-1; i++) {
+			if(parseInt(irrupciones[i].value) >= parseInt(ultimaIrrup)){
+				detectError = true;
+			}else{
+				ultimaIrrup = parseInt(irrupciones[i].value);
+			}
+		}
+		return detectError;
+	}
+
+	function irrupcionesNoVacias(datos){
+		valido = true;
+		for(var i = 0; i < datos.length; i++){
+			if(datos[i].value == '' || datos[i].value == null){
+				valido = false;
+			}
+		}
+		return valido;
+	}
+
+	function duracionesNoVacias(datos){
+		valido = true;
+		for(var i = 0; i < datos.length; i++){
+			if(datos[i].value == ''){
+				valido = false;
+			}
+		}
+		return valido;
+	}
+
+	function nombresTareasNoVacias(datos){
+		valido = true;
+		for(var i = 0; i < datos.length; i++){
+			if(datos[i].value == ''){
+				valido = false;
+			}
+		}
+		return valido;
+	}
+
+
+
+</script>
