@@ -374,9 +374,9 @@
 	function falloUsuario(){
 		detectError = false;
 		irrupciones = $('input#irr');
-		ultimaIrrup = irrupciones[irrupciones.length-1].value;
-		for (var i = 0; i < irrupciones.length-1; i++) {
-			if(parseInt(irrupciones[i].value) >= parseInt(ultimaIrrup)){
+		ultimaIrrup = irrupciones[0].value;
+		for (var i = 1; i < irrupciones.length; i++) {
+			if(parseInt(ultimaIrrup) >= parseInt(irrupciones[i].value)){
 				detectError = true;
 			}else{
 				ultimaIrrup = parseInt(irrupciones[i].value);
