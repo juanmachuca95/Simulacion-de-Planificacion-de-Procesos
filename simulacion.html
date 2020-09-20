@@ -20,10 +20,10 @@
 		</div>
 		<div class="row m-0">
 			<div class="col-md-5">
-				<h6>
-					<a style="text-decoration: none; font-weight: lighter;" id="fila" href="#">Agrega fila- </a>
-					<a style="text-decoration: none; font-weight: lighter;" id="borrar" href=""> Reiniciar </a>
-				</h6>
+				<p>
+					<a class="font-weight-bold font-italic text-info" style="text-decoration: none;" id="fila" href="#">Agrega fila- </a>
+					<a class="font-weight-bold font-italic text-info" style="text-decoration: none;" id="borrar" href=""> Reiniciar </a>
+				</p>
 				<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 				  <thead class="thead-dark">
@@ -47,8 +47,8 @@
 				  		<td>
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="5" required>
 				  		</td>
-				  		<td></td>
-				  		<td></td>
+				  		<td id="esp"></td>
+				  		<td id="ret"></td>
 				  	</tr>
 				  	<tr>
 				  		<td>
@@ -60,8 +60,8 @@
 				  		<td>
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="3" required>
 				  		</td>
-				  		<td></td>
-				  		<td></td>
+				  		<td id="esp"></td>
+				  		<td id="ret"></td>
 				  	</tr>
 				  	<tr>
 				  		<td>
@@ -73,8 +73,8 @@
 				  		<td>
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="11" required>
 				  		</td>
-				  		<td></td>
-				  		<td></td>
+				  		<td id="esp"></td>
+				  		<td id="ret"></td>
 				  	</tr>
 				  	<tr>
 				  		<td>
@@ -86,11 +86,16 @@
 				  		<td>
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="1" required>
 				  		</td>
-				  		<td></td>
-				  		<td></td>
+				  		<td id="esp"></td>
+				  		<td id="ret"></td>
 				  	</tr>
 				  </tbody>
 				</table>
+				
+				<div id="resultado" class="p-3 font-weight-bold">
+
+				</div>
+
 				<div class="text-danger" id="respuesta"></div>
 				<button class="btn btn-warning text-dark" type="submit" id="generar">Generar Gr&aacutefica</button>
 				</form>
@@ -107,7 +112,6 @@
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="plugins/inputnumber/bootstrap-input-spinner.js"></script>
 </body>
 <footer class="bg-light">
 	<div class="container font-weight-light p-0">
@@ -162,14 +166,19 @@
 					'required': true,
 				})
 			),
-			$('<td>'),
-			$('<td>'),
+			$('<td>',{
+				'id' : 'esp',
+			}),
+			$('<td>',{
+				'id' : 'ret'
+			}),
 		).appendTo('#tablaDatos');
 	}
 
 	function borrar(e){
 		e.preventDefault();
 		document.getElementById('tablaDatos').innerHTML = '';
+		document.getElementById('resultado').innerHTML = '';
 		crearFila();crearFila();crearFila();crearFila();
 		ctx = document.getElementById('tMasCorto');
 		ctx.remove();
@@ -247,6 +256,7 @@
 				console.log('SE EJECUTO: '+i+' DURO: '+irrup[i]);
 
 				recta = (recta == 0)? i+irrup[i] : recta + irrup[i];
+				tEspera[i] = 0;
 				console.log('EL INTERVALO SERA : '+(recta-irrup[i])+' , '+recta);
 				grafica[i] = new Array(recta-irrup[i],recta);
 				console.log(grafica[i]);
@@ -261,7 +271,7 @@
 
 				console.log('SE EJECUTO: '+dato+' DURO: '+dat);
 
-
+				tEspera[dato] = recta - dato;
 				recta = (recta == 0)? dato+irrup[dato] : recta + irrup[dato];
 				console.log('EL INTERVALO SERA : '+(recta-irrup[dato])+' , '+recta);
 				grafica[dato] = new Array(recta-irrup[dato],recta);
@@ -282,6 +292,8 @@
 			console.log('EN ESPERA: '+enEspera);
 		}
 
+		console.log('ARRAY DE ESPERA: '+tEspera);
+
 
 		/*Preparamos el Array para el grafico*/
 		graf = new Array();
@@ -293,6 +305,39 @@
 		  }
 		}
 
+		/***********************************************************************************************/
+		
+		/*Preparamos el Array de Tiempos de Espera*/
+		tEsp = new Array();
+		esp=0;
+		for(i=0; i < tEspera.length; i++){
+		    if(tEspera[i] !== undefined){
+		    tEsp[esp] = tEspera[i];
+			esp++;
+		  }
+		}
+		tEspera = tEsp;
+		console.log('ARRAY DE ESPERA: '+tEspera);
+		tablaEspera = $('td#esp');
+		tablaRetorno = $('td#ret');
+		xDur = $('input#dur');
+		suma = 0;
+		for(j=0; j < tablaEspera.length; j++){
+			tablaEspera[j].textContent = tEspera[j];
+			suma = suma + tEspera[j]; 	
+		}
+		tiempoEsperaPromedio = parseFloat(suma/tablaEspera.length);
+		suma = 0;
+		/*Para este metodo en especial por ser no apropiativo es la duracion del proceso*/
+		for(j=0; j < tablaRetorno.length; j++){
+			tablaRetorno[j].textContent = xDur[j].value;
+			suma = suma + parseInt(xDur[j].value); 	
+		}
+		tiempoRetornoPromedio = parseFloat(suma/tablaRetorno.length);
+		$('#resultado').html('Tiempo de espera promedio: '+tiempoEsperaPromedio+'<br>'+
+		'Tiempo de retorno promedio : '+tiempoRetornoPromedio);
+
+		/***********************************************************************************************/
 		nombres = nombres.reverse();
 		graf = graf.reverse();
 
@@ -306,7 +351,6 @@
 			return menor;
 		}
 
-
 		function eliminarEnEspera(j){
 			arr = new Array();
 			ejecutado.push(j);
@@ -318,7 +362,6 @@
 			enEspera = arr;
 			return enEspera;
 		}
-
 
 		function yaEjecutado(k){
 			if(ejecutado.find(element=>element == k)){
