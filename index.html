@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Simulaci&oacuten | Gr&aacutefica de Procesos</title>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+
+	<link rel="shortcut icon" href="assets/planificacion_procesos.svg" type="image/x-icon">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 	<!--Bootstrap 4-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/3b9095d4bc.js" crossorigin="anonymous"></script>
 	
 </head>
+<body>
+	
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+	
+</head>
 
 
 <body>
 	<div class="container py-4 px-0">
-		<div class="px-3">
-			<h4>Simulaci&oacuten Gr&aacutefica de Procesos <i class="fas fa-chart-bar text-warning"></i></h4>
-			<hr>
+		<div class="row m-0">
+			<div class="col-12 col-md-6">
+				<img class="img-fluid" src="assets/planificacion_procesos.svg" alt="planificacion_procesos">
+			</div>
+
+			<div class="col-12 col-md-6">
+				<div class="py-2">
+					<h5>Planifición de procesos</h5>
+					<h6>Primero el restante más corto - representación gráfica</h6>		
+				</div>
+			</div>
 		</div>
+		<hr>
+
 		<div class="row m-0">
 			<div class="col-md-5">
 				<p>
-					<a class="font-weight-bold font-italic text-info" style="text-decoration: none;" id="fila" href="#">Agrega fila- </a>
-					<a class="font-weight-bold font-italic text-info" style="text-decoration: none;" id="borrar" href=""> Reiniciar </a>
+					<a class="font-weight-light" style="text-decoration: none;" id="fila" href="#">Agrega fila- </a>
+					<a class="font-weight-light" style="text-decoration: none;" id="borrar" href=""> Reiniciar </a>
 				</p>
 				<div class="table-responsive">
 				<table class="table table-bordered table-striped">
@@ -38,56 +64,56 @@
 				  <form id="form-datos">
 				  <tbody id="tablaDatos">
 				  	<tr>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="text" id="nomProceso" value="A" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="1" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="5" required>
 				  		</td>
-				  		<td id="esp"></td>
-				  		<td id="ret"></td>
+				  		<td class="p-0 m-0 text-center" id="esp"></td>
+				  		<td class="p-0 m-0 text-center" id="ret"></td>
 				  	</tr>
 				  	<tr>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="text" id="nomProceso" value="B" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="2" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="3" required>
 				  		</td>
-				  		<td id="esp"></td>
-				  		<td id="ret"></td>
+				  		<td class="p-0 m-0 text-center" id="esp"></td>
+				  		<td class="p-0 m-0 text-center" id="ret"></td>
 				  	</tr>
 				  	<tr>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="text" id="nomProceso" value="C" required>
-				  		</td>
-				  		<td>
+				  		</td >
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="4" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="11" required>
 				  		</td>
-				  		<td id="esp"></td>
-				  		<td id="ret"></td>
+				  		<td class="p-0 m-0 text-center" id="esp"></td>
+				  		<td class="p-0 m-0 text-center" id="ret"></td>
 				  	</tr>
 				  	<tr>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="text" id="nomProceso" value="D" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="0" max="100" id="irr" value="5" required>
 				  		</td>
-				  		<td>
+				  		<td class="p-0 m-0">
 				  			<input class="form-control" type="number" min="1" max="99" id="dur" value="1" required>
 				  		</td>
-				  		<td id="esp"></td>
-				  		<td id="ret"></td>
+				  		<td class="p-0 m-0 text-center" id="esp"></td>
+				  		<td class="p-0 m-0 text-center" id="ret"></td>
 				  	</tr>
 				  </tbody>
 				</table>
@@ -103,8 +129,7 @@
 				
 			</div>
 			<div class="col-12 col-sm-12 col-md-7 col-lg-7 py-4">
-				<h6><b>Tarea</b> : Nombre del proceso | <b>T.I.</b> : Tiempo de irrupci&oacuten | <b>T.E.</b> : Tiempo de espera | <b>T.R.</b> : Tiempo de retorno.</h6>
-				<div class="Chart m-4" id="MyCanvas" style="position: relative;">
+				<div class="Chart" id="MyCanvas" style="position: relative;">
 					<canvas id="tMasCorto" style="min-height: 300px; max-height: 300px; max-width: 300;">
 					</canvas>
 				</div>
@@ -115,12 +140,7 @@
 </body>
 <footer class="bg-light">
 	<div class="container font-weight-light p-0">
-		<div class="p-5 font-weight-bold">
-			<p>Planificaci&oacuten del Procesador</p>
-			<p>Tecn&oacutelogias: <b class=" text-warning">Javascript</b></p>
-			<p>Programador: Machuca Juan Gabriel</p>
-		</div>
-		<p class="text-center m-0 p-0">Todos los derechos reservados &#xae;&#xfe0f;<b class="font-weight-bold">Abanderados 2020 </b></p>
+		<p class="text-center m-0 p-0">Copyright &#xae;&#xfe0f;<a href="https://juanmachuca95.github.io/" class="text-muted">juanmachuca95</a> 2021</p>
 	</div>
 </footer>
 
